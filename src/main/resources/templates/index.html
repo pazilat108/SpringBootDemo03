@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    <h1>index页面</h1>
+    name:[[${name}]]
+    <p th:text="${name}"></p>
+
+    <hr>
+
+    [[${session.user.password}]]
+
+    <!-- 如果条件为真，执行标签内的内容 -->
+    <div th:if="${false}">
+        天天18
+    </div>
+
+    <!-- 如果添加为假，执行标签内的内容 -->
+    <div th:unless="${false}">
+        别做梦
+    </div>
+
+    <div th:if="${true or false}">
+        真的18岁
+    </div>
+
+    <div th:if="${not false}">
+        真的别做梦
+    </div>
+
+    <span th:text="true ? '今年不是18岁' : '总算清醒了'"></span>
+
+    <div th:switch="${21}">
+        <div th:case="16">我今年16岁</div>
+        <div th:case="17">我今年17岁</div>
+        <div th:case="18">我今年18岁</div>
+        <div th:case="*">我年年18岁</div>
+    </div>
+
+    <h1>*******</h1>
+    <h3>需求：输出用户信息</h3>
+    <table border="1" cellspacing="0">
+        <tr>
+            <th>序号</th>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>密码</th>
+        </tr>
+        <tr th:each="user, iterStat:${userList}">
+            <td th:text="${iterStat.count}"></td> #index 从1开始 count从0开始
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.password}"></td>
+        </tr>
+    </table>
+</body>
+</html>
